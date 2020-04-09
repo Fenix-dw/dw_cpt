@@ -7,7 +7,7 @@
 		settings_errors('название_опции');
 	?>
 
-	<form action="" method="POST" id="dw-cpt-form-post-create">
+	<form action="" data-action="create-post-dw" method="POST" class="dw-cpt-form">
 
 		<div>
 			<label for="slug">Post Type Slug *</label>
@@ -24,9 +24,14 @@
 
 
 		<?php
-			settings_fields("opt_group");     // скрытые защитные поля
-			do_settings_sections("opt_page"); // секции с настройками (опциями).
-			submit_button();
+		// public $slucs;
+		echo "dds" . $slugs;
+// settings_fields("opt_group");     // скрытые защитные поля
+			// do_settings_sections("opt_page");		
+			submit_button("Create");
 		?>
+		<p id="loader">
+			<img src="<?php echo CPT_PLUGIN_URL . "/assets/imges/loader.gif" ?>" alt="">
+		</p>
 	</form>
 </div>
