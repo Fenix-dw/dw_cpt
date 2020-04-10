@@ -1,10 +1,10 @@
 <?php 
 function decod($json) {
-	$json = json_decode($json);
+	// $json = json_decode($json);
 	echo '<pre>';
 	var_dump($json);
 	echo '<pre>';
-	wp_die();
+	// wp_die();
 }
 
 function dw_cpt_add_menu() {

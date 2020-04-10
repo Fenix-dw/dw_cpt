@@ -7,7 +7,7 @@
 		settings_errors('название_опции');
 	?>
 
-	<form action="" data-action="create-post-dw" method="POST" class="dw-cpt-form">
+	<form action="" data-action="create_post_dw" method="POST" class="dw-cpt-form">
 
 		<div>
 			<label for="slug">Post Type Slug *</label>
@@ -25,7 +25,6 @@
 
 		<?php
 		// public $slucs;
-		echo "dds" . $slugs;
 // settings_fields("opt_group");     // скрытые защитные поля
 			// do_settings_sections("opt_page");		
 			submit_button("Create");

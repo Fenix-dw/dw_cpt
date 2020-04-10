@@ -89,9 +89,20 @@
             }            
         }
 
-        public function delete()
-        {
+        public function delete($data = false, $slug = false)
+        {   
+            if(!$data) return;
 
+            $post_types = json_decode($data);
+
+            foreach ($post_types as $key => $post_type) {
+                foreach ($post_type as $ke => $labels) {
+                    if ($ke == $slug) {
+                        unset($post_types[$key]);
+                    }
+                }  
+            }    
+            file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($post_types) ." ';");
         }
 
     }

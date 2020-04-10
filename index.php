@@ -14,14 +14,16 @@ require_once CPT_PLUGIN_DIR . "/function.php";
 // // esc_html_e();
 // add_action('admin_menu', 'dw_cpt_add_menu');
 add_action("admin_enqueue_scripts", 'dw_cpt_scripts');
+	require_once CPT_PLUGIN_DIR . '/core/model.php';
+	require_once CPT_PLUGIN_DIR . '/core/view.php';
+	require_once CPT_PLUGIN_DIR . '/core/controller.php';
+
+	require_once CPT_PLUGIN_DIR . '/Modules/DataModel.php';
 	require_once CPT_PLUGIN_DIR . '/Modules/Helper.php';
 	require_once CPT_PLUGIN_DIR . '/Modules/AuthError.php';
-	require_once CPT_PLUGIN_DIR . '/Modules/Controller/PostTypesController.php';
 	require_once CPT_PLUGIN_DIR . '/Modules/Controller/AdminMenyController.php';
+	require_once CPT_PLUGIN_DIR . '/Modules/Controller/PostTypesController.php';
 	require_once CPT_PLUGIN_DIR . '/Modules/Controller/CommentController.php';
-
-
-
 
 // add_action( 'init', 'dw_cpt_view_post_types' );
 // add_action('wp_ajax_dw_cpt_form_post_create', 'wp_ajax_dw_cpt_form_post_create');

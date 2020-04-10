@@ -2,7 +2,9 @@ jQuery(document).ready(function( $ ) {
 
 	$('.dw-cpt-form').on('submit', function(event) {
 		event.preventDefault();
-        var way = 'create_post_dw';
+console.log('hh');
+        var way = $(this).data('action');
+
         var formData = $(this).serialize() + "&action=" + way;
 		$.ajax({
 			url: ajaxurl,
