@@ -1,6 +1,9 @@
 <?php 
-function decod($json) {
-	// $json = json_decode($json);
+function decode($json) {
+	// if(is_array($json)) {
+		// $json = json_decode($json);
+	// }
+	
 	echo '<pre>';
 	var_dump($json);
 	echo '<pre>';
@@ -14,6 +17,7 @@ function dw_cpt_add_menu() {
 function dw_cpt_scripts() {
 	wp_enqueue_script( 'dw-cpt-jquery', CPT_PLUGIN_URL . '/assets/js/jquery-3.4.1.min.js', array() , null , true );
 	wp_enqueue_script( 'dw-cpt-scripts', CPT_PLUGIN_URL . '/assets/js/dw-cpt-script.js', array( 'jquery' ), null, true );
+	wp_enqueue_style( 'dw-cpt-bootstrap', CPT_PLUGIN_URL . '/assets/css/bootstrap.css' );
 	wp_enqueue_style( 'dw-cpt-style', CPT_PLUGIN_URL . '/assets/css/style.css' );
 }
 

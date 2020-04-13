@@ -7,30 +7,33 @@
 		settings_errors('название_опции');
 	?>
 
-	<form action="" data-action="create_post_dw" method="POST" class="dw-cpt-form">
+	<form action="" data-action="post_types_dw" method="POST" class="dw-cpt-form">
 
-		<div>
+		<div class="form-group">
 			<label for="slug">Post Type Slug *</label>
-			<input type="text" name="slug">
+			<input id="slug" type="text" name="slug">
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="plural_name">Plural Label *</label>
-			<input type="text" name="plural_name">
+			<input id="plural_name" type="text" name="plural_name">
 		</div>
-		<div>
+		<div class="form-group">
 			<label for="singular_name">Singular Label *</label>
-			<input type="text" name="singular_name">
+			<input id="singular_name" type="text" name="singular_name">
 		</div>
+			<input type="hidden" name="cheack"  value="create">		
+			
 
-
-		<?php
-		// public $slucs;
-// settings_fields("opt_group");     // скрытые защитные поля
-			// do_settings_sections("opt_page");		
-			submit_button("Create");
-		?>
+		<?php submit_button("Create");	?>
 		<p id="loader">
 			<img src="<?php echo CPT_PLUGIN_URL . "/assets/imges/loader.gif" ?>" alt="">
 		</p>
+
+			<div id="message" class="alert alert-success alert-dismissible fade show" role="alert">
+			  <span class="alert"> Good!! </span>
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+			</div>			
 	</form>
 </div>

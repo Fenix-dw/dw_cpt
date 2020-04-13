@@ -1,6 +1,6 @@
 <?php 
 /**
- * Plugin Name: CreatePost
+ * Plugin Name: DW_CPT
  * Description: Создание пост типов
  * Author: Felix DW
  * Version: 0.0.1

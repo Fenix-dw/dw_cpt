@@ -1,3 +1,47 @@
-#loader {
+#loader, #message {
 	display: none;
 }
+/*body {
+   height: 40rem;
+   width: 60rem;
+   padding: 3rem 0 0 5rem;
+   background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgba(242, 243, 245, 0.99), rgba(230, 231, 236, 0.98), rgba(217, 219, 226, 0.96), rgba(204, 207, 216, 0.95), rgba(191, 195, 206, 0.94), rgba(179, 182, 197, 0.93), rgba(166, 170, 187, 0.92), rgba(153, 158, 177, 0.91), rgba(140, 146, 167, 0.89), rgba(128, 134, 158, 0.88), rgba(115, 122, 148, 0.87));
+}
+*/
+.inputP{
+   color: black;
+   position:relative;
+}
+
+.bottom-border {
+   background-color: rgb(226, 222, 222);
+   border-bottom: 2px solid black;
+   padding: 0.2rem;
+}
+
+.input3 {
+   padding: 1rem;
+}
+
+.star {   
+   color: red;
+}
+
+.link {
+   padding: 1rem;
+}
+.text {
+   font-style: italic;
+}
+.dw-error {
+   border: 3px solid red;
+}
+.text-error {
+   color: red;
+}
+/*input:-webkit-autofill{
+  -webkit-text-fill-color: #ED4159;
+}
+input:-webkit-autofill:focus{
+  -webkit-text-fill-color: #ED4159;
+}*/
