@@ -13,7 +13,7 @@
 
 			add_submenu_page( 'cpt_dw.php', 'Создание пост типа', 'Create_Post', 'manage_options', 'cpt_dw.php', array( $this, 'admin_page_create' ) );
 			add_submenu_page( 'cpt_dw.php', 'Удаление пост типа', 'Delete_Post', 'manage_options', 'delte_cpt_dw.php', array( $this, 'admin_page_delete' ) );
-			add_submenu_page( 'cpt_dw.php', 'Редактирование пост типов', 'Edit_Post', 'manage_options', 'edit_cpt_dw.php', array( $this, 'admin_page_edit' ) );
+			add_submenu_page( 'cpt_dw.php', 'Редактирование/Удаление пост типов', 'Edit/Delete_Post', 'manage_options', 'edit_cpt_dw.php', array( $this, 'admin_page_edit' ) );
 		}		
 
 		public function admin_page_create() 

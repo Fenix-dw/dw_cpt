@@ -25,7 +25,7 @@
         public function get($data = false, $old_slug = false)
         {
             // $data1 = str_replace(" ","",$data);
-            if(!$data1) return;
+            // if(!$data1) return;
             $input = [ "slugs" => [],
                         "slug" => null,
                         "plural_name" => null,
@@ -40,7 +40,7 @@
                     if($old_slug){
                         if ($old_slug == $key) {
                         $input['slug'] =  $key;
-                        $input['plural_name'] = $label->name;
+                        $input['plural_name'] = $label->plural_name;
                         $input['singular_name'] = $label->singular_name;
                         }
                     }  
@@ -60,20 +60,10 @@
             //     wp_die();                
             // }
             $post_types[] = [ $this->slug => [
-                'name' =>  $this->plural_name,
+                'plural_name' =>  $this->plural_name,
                 'singular_name' => $this->singular_name, // админ панель Добавить->Функцию
-                'add_new' => 'Добавить '. $this->singular_name ,
-                'add_new_item' => 'Добавить новый '. $this->singular_name, // заголовок тега <title>
-                'edit_item' => 'Редактировать '. $this->singular_name,
-                'new_item' => 'Новый ' . $this->singular_name,
-                'all_items' => 'Все ' .  $this->plural_name,
-                'view_item' => 'Просмотр на сайте',
-                'search_items' => 'Искать ' .  $this->plural_name,
-                'not_found' =>  $this->singular_name . ' не найдено.',
-                'not_found_in_trash' => 'В корзине нет ' . $this->singular_name,
-                'menu_name' => $this->plural_name,// ссылка в меню в админке                 
             ]];  
-            file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($post_types) ." ';");        
+            file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($post_types) ."';");        
         }
 
         public function view($data = false)
@@ -84,8 +74,22 @@
             $post_types = json_decode($data);
             foreach ($post_types as $post_type) {
                 foreach ($post_type as $key => $labels) {
+                    $label = [
+                        'name' =>  $labels->plural_name,
+                        'singular_name' =>  $labels->singular_name, // админ панель Добавить->Функцию
+                        'add_new' => 'Добавить '. $labels->singular_name,
+                        'add_new_item' => 'Добавить новый '. $labels->singular_name, // заголовок тега <title>
+                        'edit_item' => 'Редактировать '. $labels->singular_name,
+                        'new_item' => 'Новый ' . $labels->singular_name,
+                        'all_items' => 'Все ' .  $labels->plural_name,
+                        'view_item' => 'Просмотр на сайте',
+                        'search_items' => 'Искать ' .  $labels->plural_name,
+                        'not_found' =>  $labels->singular_name . ' не найдено.',
+                        'not_found_in_trash' => 'В корзине нет ' . $labels->singular_name,
+                        'menu_name' => $labels->plural_name,// ссылка в меню в админке                 
+                    ];
                     $args = array(
-                        'labels' => $labels,
+                        'labels' => $label,
                         'public' => true, // благодаря этому некоторые параметры можно пропустить
                         'show_ui' => true, // показывать интерфейс в админке
                         'menu_icon' => 'dashicons-admin-post', 
@@ -114,16 +118,19 @@
                     }
                 }  
             }    
-
-            foreach ($post_types as $value) {
-                $poste[] = $value;
-            }            
-            file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($poste) ." ';");
+            if(is_array($post_types)){
+                foreach ($post_types as $value) {
+                    $poste[] = $value;
+                }          
+            } 
+            $poste = ($poste) ? json_encode($poste) : "" ;
+                  
+            file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". $poste ."';");
         }
 
         public function edit($old_slug = false)
         {
-            if( !$this->data && !$old_slug ) return;
+            // if( !$this->data && !$old_slug ) return;
 
             $post_types = json_decode($this->data);
 
@@ -152,7 +159,7 @@
                 
             }    
             // return json_encode($new_post_types) ;
-            if($new_post_types) file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($new_post_types) ." ';");                        
+            if($new_post_types) file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($new_post_types) ."';");                        
         }
 
     }

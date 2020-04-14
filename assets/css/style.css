@@ -34,7 +34,7 @@
    font-style: italic;
 }
 .dw-error {
-   border: 3px solid red;
+   border: 3px solid #ff5959 !important;
 }
 .text-error {
    color: red;

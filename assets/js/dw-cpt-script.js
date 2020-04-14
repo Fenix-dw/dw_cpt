@@ -32,13 +32,17 @@ jQuery(document).ready(function( $ ) {
 		old_slug.change(get_post);
 	}
 	
+	var cheack = null;
+	$('button[type="submit"]').on('click', function(event){
+		cheack = $(this).val();
+	});
 
 	$('.dw-cpt-form').on('submit', function(event) {
 		event.preventDefault();
 
         var way = $(this).data('action');
 
-        var formData = $(this).serialize() + "&action=" + way;
+        var formData = $(this).serialize() + "&action=" + way + "&cheack=" + cheack;
 		$.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -46,6 +50,7 @@ jQuery(document).ready(function( $ ) {
 			beforeSend: function() {
 				$('.submit').fadeOut('300', function() {
 					$('#loader').fadeIn();
+					$('#message').fadeOut();
 				});
 			},
 		})
@@ -53,33 +58,53 @@ jQuery(document).ready(function( $ ) {
 			console.log(res);
 			if (res.success) {
 				refreshContent();
-				$('#message .alert').text("Создался успешно!!!");
-			} else if (res.success == 'false') {
-				$('#message .alert')
-				 .text(res.data.field)
-				 .addClass('alert-danger')
-				 .removeClass('alert-success');
-					var e = 0;
-				$( ".form-group" )
-					.removeClass('error_dw')
-					.each(function(index) {
-						if (index == res.data.no_value[e]){
-							e++;
-							$( this ).addClass( "error_dw" );
-						}
-					}); 
-				// $('.form-group').eq(0).addClass('error_dw');
-				$('.message-error').remove();
-				$('.error_dw').append('<div class="message-error"><p>Это обязательное поле.</p></div>');
+				$('#message .alert').text(res.data.message);
+				$('#message')
+					.addClass('alert-success')
+					.removeClass('alert-danger')
+					.fadeIn();				
+				$( ".inputP" ).removeClass('dw-error');	
+				$('.text-error').remove();
+
 			}
+			if (!res.success) {
+				$('#message .alert').text(res.data.message);
+				$('#message')
+					.addClass('alert-danger')
+					.removeClass('alert-success')
+					.fadeIn();
+
+// 					
+				$( ".inputP" )
+					.removeClass('dw-error')
+					.each(function(index) {
+						if ($(this).val().length == 0){
+							$( this ).addClass( "dw-error" );
+						}
+					}); 				// 	
+
+                var emptyfields = $(".dw-error");
+                    emptyfields.each(function() {
+                        $(this)
+                        	.stop()
+                            .animate({ left: "-10px" }, 100).animate({ left: "10px" }, 100)
+                            .animate({ left: "-10px" }, 100).animate({ left: "10px" }, 100)
+                            .animate({ left: "0px" }, 100);
+                    });
+				$('.text-error').remove();
+				$('.dw-error').parent('.from-dw').append('<p class="text text-error">Это поле обовязкове к заполнению.</p>');
+			} 
 		})
 		.fail( function() {
-			alert('Ошибка на сервере!!!');
+			$('#message .alert').text('Ошибка на сервере!!!');
+			$('#message')
+					.addClass('alert-danger')
+					.removeClass('alert-success')
+					.fadeIn();			
 		})
 		.always( function() {
 			$('#loader').fadeOut('300', function() {
 					$('.submit').fadeIn();
-					$('#message').fadeIn();
 				});	
 		})
 	});
@@ -101,7 +126,7 @@ jQuery(document).ready(function( $ ) {
 
 	function refreshContent() {
 		var href = document.location.href;
-			if( $(' input[name="cheack"]').val() == "create" ){
+			if( $(' button[name="cheack"]').val() == "create" ){
 				$('#slug').val('');
 				$('#plural_name').val('');
 				$('#singular_name').val('');				
@@ -113,7 +138,10 @@ jQuery(document).ready(function( $ ) {
                 success: function(html){  
                 	html = $(html);
                 	$('#adminmenuwrap').html($('#adminmenuwrap', html));
-                    // $("#content").html(html);  
+					if($('#my_slug').length){
+	                	$('#old_slug').html($('#old_slug', html));
+	                	get_post();
+                	}
                 }  
 		});
 
