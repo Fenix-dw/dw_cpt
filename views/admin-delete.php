@@ -13,11 +13,7 @@
 	<h2><?php echo get_admin_page_title() ?></h2>
 
 	<form action="" data-action="post_types_dw" method="POST" class="dw-cpt-form">
-	<?php
-	 // var_dump($slugs);
-decode($data);
-
-	  ?>
+	<?php var_dump($slugs) ?>
 		<p>
 			<select name="old_slug">
 	    		<?php foreach ( $slugs as $slug ) : ?>

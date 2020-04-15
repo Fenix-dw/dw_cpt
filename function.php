@@ -7,6 +7,7 @@
 
 function select_dw() {
     $data = DataModel::get_data();
+    if(!$data) return;
 	$inputs = PostTypesController::get($data);
 	$inputs = (array) json_decode($inputs);
 	if(is_array($inputs)) extract($inputs);
@@ -26,10 +27,11 @@ function dw_cpt_scripts() {
 	wp_enqueue_style( 'dw-cpt-bootstrap', CPT_PLUGIN_URL . '/assets/css/bootstrap.css' );
 	wp_enqueue_style( 'dw-cpt-style', CPT_PLUGIN_URL . '/assets/css/style.css' );
 }
+add_action("admin_enqueue_scripts", 'dw_cpt_scripts', 99);	
 
 function decode($json) {
 	// if(is_array($json)) {
-		$json = json_decode($json);
+		// $json = json_decode($json);
 	// }	
 	echo '<pre>';
 	var_dump($json);

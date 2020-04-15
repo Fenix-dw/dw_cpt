@@ -139,11 +139,70 @@ jQuery(document).ready(function( $ ) {
                 	html = $(html);
                 	$('#adminmenuwrap').html($('#adminmenuwrap', html));
 					if($('#my_slug').length){
-	                	$('#old_slug').html($('#old_slug', html));
+	                	$('.input3').html($('.input3', html));
 	                	get_post();
                 	}
                 }  
 		});
 
 	}
+
+
+
+if($('.btn-success[value="create"]').length) {
+	$('#slug').change(function() {
+		$.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: {action: 'slug_change', slug: $('#slug').val(), },
+			beforeSend: function() {
+				// $('#basic_post').fadeOut('300', function() {
+				// 	$('#loader').fadeIn();
+				// });
+			},
+			success: function(res) {
+				console.log(res);
+
+				if(res.success){
+					$('.text-error').remove();				
+					if($('#slug').hasClass('dw-error')){
+						$('.dw-error').parent('.from-dw').append('<p class="text text-success">' + res.data.message + '</p>');
+					}
+					$( "#slug" ).removeClass('dw-error');
+					$('#message').fadeOut();
+				}
+				if (!res.success) {
+					// $('#message .alert').text(res.data.message);
+					// $('#message')
+					// 	.addClass('alert-danger')
+					// 	.removeClass('alert-success')
+					// 	.fadeIn();
+					if($('p').hasClass('text-success')){
+						$('.text-success').remove();
+					}
+						
+					$( "#slug" )
+						.removeClass('dw-error')
+						.addClass( "dw-error" );
+
+	                var emptyfields = $(".dw-error");
+	                    emptyfields.each(function() {
+	                        $(this)
+	                        	.stop()
+	                            .animate({ left: "-10px" }, 100).animate({ left: "10px" }, 100)
+	                            .animate({ left: "-10px" }, 100).animate({ left: "10px" }, 100)
+	                            .animate({ left: "0px" }, 100);
+	                    });
+					$('.text-error').remove();
+					$('.dw-error').parent('.from-dw').append('<p class="text text-error">' + res.data.message + '</p>');
+				} 	
+			},				
+			  
+		});	
+	});
+}
+	$('.close').on('click', function(event) {
+		event.preventDefault();
+		$('#message').fadeOut();
+	});
 });

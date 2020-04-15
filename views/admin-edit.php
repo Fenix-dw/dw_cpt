@@ -26,7 +26,7 @@
 	        			 <?php select_dw(); ?>
 	                </div>
 	         </div>
-<div id="basic_post">
+<div id="basic_post" class="none">
 	         <div class="form-group row">
 	             <div class="col-sm-2 col-form-label">
 	               <label for="inputText">Post type slag</label>
@@ -55,8 +55,8 @@
 	            </div>
 	         </div>
 	      <div class="submit">
-		      <button type="submit" name="cheack"  value="delete" class="btn btn-light">Delete</button>
-		      <button type="submit" id="btn-sign" name="cheack"  value="edit" class="btn btn-primary">Edit</button>
+		      <button type="submit" name="cheack"  value="delete" class="btn btn-danger">Delete</button>
+		      <button type="submit" id="btn-sign" name="cheack"  value="edit" class="btn btn-success">Edit</button>
 	      </div>
 </div>
 

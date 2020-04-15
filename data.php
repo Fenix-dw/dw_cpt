@@ -1,1 +1,1 @@
-<?php return '[{"dishes":{"plural_name":"\u041f\u0440\u043e\u0434\u0443\u043a\u0442\u044b","singular_name":"sss"}}]';
+<?php return '';

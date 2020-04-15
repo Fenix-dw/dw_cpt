@@ -106,8 +106,8 @@
 
         public function delete($old_slug = false, $data = false)
         {   
-            if( !$data && $this->data ) $data = $this->data;
-            if(!$data) return "no_date";
+            // if( !$data && $this->data ) $data = $this->data;
+            // if(!$data) return "no_date";
             // $data = $this->data;
             $post_types = json_decode($data);
 
@@ -130,7 +130,7 @@
 
         public function edit($old_slug = false)
         {
-            // if( !$this->data && !$old_slug ) return;
+            if( !$this->data && !$old_slug ) return;
 
             $post_types = json_decode($this->data);
 
@@ -138,25 +138,12 @@
                 foreach ($post_type as $ke => $label) {
                     if ($ke == $old_slug) {
                         $update_post_type = [ $this->slug => [
-                                        'name' =>  $this->plural_name,
-                                        'singular_name' => $this->singular_name, // админ панель Добавить->Функцию
-                                        'add_new' => 'Добавить '. $this->singular_name ,
-                                        'add_new_item' => 'Добавить новый '. $this->singular_name, // заголовок тега <title>
-                                        'edit_item' => 'Редактировать '. $this->singular_name,
-                                        'new_item' => 'Новый ' . $this->singular_name,
-                                        'all_items' => 'Все ' .  $this->plural_name,
-                                        'view_item' => 'Просмотр на сайте',
-                                        'search_items' => 'Искать ' .  $this->plural_name,
-                                        'not_found' =>  $this->singular_name . ' не найдено.',
-                                        'not_found_in_trash' => 'В корзине нет ' . $this->singular_name,
-                                        'menu_name' => $this->plural_name,// ссылка в меню в админке                 
-                                    ]];                         
+                            'plural_name' =>  $this->plural_name,
+                            'singular_name' => $this->singular_name, // админ панель Добавить->Функцию
+                        ]];                        
                        $new_post_types = array_replace($post_types ,[$key => $post_type], [$key => $update_post_type]);
-                                   
                     }
-
                 }  
-                
             }    
             // return json_encode($new_post_types) ;
             if($new_post_types) file_put_contents(CPT_PLUGIN_DIR . "/data.php", "<?php return '". json_encode($new_post_types) ."';");                        
